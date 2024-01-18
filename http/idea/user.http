@@ -1,0 +1,51 @@
+# Run with: dev -^
+
+### Login
+POST http://{{host}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+> {% client.global.set("token", response.body.accessToken);  %}
+
+### Get all users.
+GET http://{{host}}/api/users HTTP/1.1
+Authorization: Bearer {{token}}
+
+### Get one user.
+GET http://{{host}}/api/users/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+### Update user.
+PATCH http://{{host}}/api/users/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "username": "admin",
+  "email": "admin@email.com",
+  "password": "$2a$10$o/2idQn7mMHKQds74ySUXu/PacGG79SksNWO/cTgI1tIG21UAnWsC",
+  "roles": [
+    {
+      "id": 2,
+      "name": "ROLE_ADMIN"
+    }
+  ]
+}
+
+### Delete user
+DELETE http://{{host}}/api/users/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+POST http://{{host}}/api/users/changePassword HTTP/1.1
+Content-Type: application/json
+
+{
+  "currentPassword": "789012",
+  "newPassword":  "123456",
+  "confirmationPassword": "123456"
+}

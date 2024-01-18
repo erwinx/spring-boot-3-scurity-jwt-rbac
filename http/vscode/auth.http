@@ -1,0 +1,26 @@
+@host=localhost:8005
+
+### Register admin
+POST http://{{host}}/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email":  "admin@mail.com",
+  "password": "123456",
+  "role": ["ROLE_ADMIN"]
+}
+
+### Register super
+POST http://{{host}}/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "super",
+  "email":  "super@mail.com",
+  "password": "123456",
+  "role": ["ROLE_SUPER_ADMIN"]
+}
+
+### Logout
+POST http://{{host}}/api/auth/Logout HTTP/1.1
